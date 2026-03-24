@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080a0f;
+  --foreground: #f5f7ff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #080a0f;
+    --foreground: #f5f7ff;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(56, 94, 255, 0.2), transparent 35%),
+    radial-gradient(circle at 90% 15%, rgba(196, 76, 255, 0.16), transparent 36%),
+    radial-gradient(circle at 50% 100%, rgba(255, 122, 82, 0.12), transparent 36%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.brand-shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.brand-panel {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(173, 189, 255, 0.22);
+  background: linear-gradient(170deg, rgba(22, 28, 43, 0.95), rgba(12, 16, 26, 0.95));
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.brand-panel-soft {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(188, 200, 255, 0.18);
+  background: linear-gradient(180deg, rgba(18, 24, 39, 0.78), rgba(12, 16, 26, 0.68));
+}
+
+.brand-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9da8ca;
+}
+
+.brand-cta-primary {
+  border-radius: 0.95rem;
+  background: linear-gradient(140deg, #4f6bff, #7b4bff);
+  color: #f8fbff;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(85, 95, 255, 0.4);
+}
+
+.brand-cta-secondary {
+  border-radius: 0.95rem;
+  border: 1px solid rgba(184, 198, 255, 0.45);
+  background: rgba(11, 16, 29, 0.6);
+  color: #dce3ff;
+}
