@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dinner Party Planner",
-  description: "Plan and coordinate warm church and community dinner gatherings.",
+  title: "Dinner Party Planner Beta",
+  description: "Plan and coordinate warm community dinner gatherings.",
 };
 
 export default function RootLayout({

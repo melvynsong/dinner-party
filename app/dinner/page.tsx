@@ -117,22 +117,6 @@ const formatDateLine = (dateTime: string) => {
 	})}`;
 };
 
-const formatWhatsappIntro = (eventName: string, dateTime: string) => {
-	const eventDate = dateTime ? new Date(dateTime) : null;
-
-	if (!eventDate || Number.isNaN(eventDate.getTime())) {
-		return eventName || "Dinner party";
-	}
-
-	const day = eventDate.toLocaleDateString([], { weekday: "long" });
-	const time = eventDate.toLocaleTimeString([], {
-		hour: "numeric",
-		minute: "2-digit",
-	});
-
-	return `${eventName || "Dinner party"} ${day}, ${time}`;
-};
-
 const getInvitationGradientClass = (theme: string) => {
 	const lowerTheme = theme.toLowerCase();
 
@@ -190,7 +174,8 @@ const buildWhatsappMessage = ({
 
 	lines.push("Hi all 😊");
 	lines.push("");
-	lines.push(formatWhatsappIntro(eventName, dateTime));
+	lines.push(eventName || "Dinner party");
+	lines.push(formatDateLine(dateTime));
 	lines.push(`📍 ${location || "Location TBC"}`);
 	lines.push("");
 	lines.push(`We are expecting about ${pax} pax.`);
@@ -211,7 +196,7 @@ const buildWhatsappMessage = ({
 	addContributionSection(lines, "🍢", "Sides", plan.sides, "Side");
 	addContributionSection(lines, "🍰", "Desserts", plan.desserts, "Dessert");
 	addContributionSection(lines, "🥤", "Drinks / logistics", plan.drinks, "Drinks");
-	lines.push("Please indicate what you would like to bring and your name 🙏");
+	lines.push("Please indicate what you would like to bring below 🙏");
 	lines.push("");
 	lines.push("Thank you everyone, and looking forward to a warm time of fellowship together 💛");
 
@@ -222,9 +207,9 @@ export default function DinnerPage() {
 	const invitationCardRef = useRef<HTMLDivElement | null>(null);
 	const [eventName, setEventName] = useState("Friday Dinner Party");
 	const [dateTime, setDateTime] = useState("2026-03-27T19:30");
-	const [location, setLocation] = useState("Song's Place");
+	const [location, setLocation] = useState("Ah Tan's Place");
 	const [pax, setPax] = useState("8");
-	const [themePreference, setThemePreference] = useState("Warm local food, practical for potluck");
+	const [themePreference, setThemePreference] = useState("");
 	const [plan, setPlan] = useState<DinnerPlan | null>(null);
 	const [message, setMessage] = useState("");
 	const [copied, setCopied] = useState(false);
@@ -376,9 +361,14 @@ export default function DinnerPage() {
 		<main className="min-h-screen py-8 md:py-12">
 			<div className="brand-shell space-y-6 md:space-y-8">
 				<header className="brand-panel p-6 md:p-8">
-					<p className="brand-eyebrow">Dinner Planner</p>
+					<div className="flex flex-wrap items-center gap-3">
+						<p className="brand-eyebrow">Dinner Planner</p>
+						<span className="rounded-full border border-indigo-200/20 bg-indigo-300/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-indigo-100">
+							Beta
+						</span>
+					</div>
 					<h1 className="mt-3 text-3xl font-extrabold tracking-tight text-zinc-50 md:text-4xl">
-						Plan a church dinner event
+						Plan a dinner party
 					</h1>
 					<p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base">
 						Set the event details, generate a practical plan, create a premium invitation,
@@ -457,7 +447,7 @@ export default function DinnerPage() {
 								className="w-full rounded-2xl border border-indigo-100/20 bg-zinc-950/60 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-indigo-300/60 focus:ring-2 focus:ring-indigo-400/20"
 								value={themePreference}
 								onChange={(event) => setThemePreference(event.target.value)}
-								placeholder="e.g., Japanese theme, easy for families&#10;Warm local food, practical for potluck&#10;Suitable for church dinner, not too complicated"
+								placeholder="e.g., Warm local food, practical for potluck"
 								rows={3}
 							/>
 						</label>
@@ -491,8 +481,8 @@ export default function DinnerPage() {
 				{plan ? (
 					<>
 						<section className="brand-panel p-6 md:p-8">
-							<p className="brand-eyebrow">🎉 Guest Invitation</p>
-							<h2 className="mt-1 text-xl font-semibold text-zinc-100">Guest-facing invitation card</h2>
+							<p className="brand-eyebrow">🎉 Invitation Card</p>
+							<h2 className="mt-1 text-xl font-semibold text-zinc-100">Download-ready invitation</h2>
 							<div
 								ref={invitationCardRef}
 								className="mx-auto mt-4 w-full max-w-[23rem] p-3"
@@ -547,7 +537,7 @@ export default function DinnerPage() {
 
 						<section className="brand-panel p-6 md:p-8">
 							<div className="space-y-1">
-								<p className="brand-eyebrow">🧑‍🍳 For Members (Food Coordination)</p>
+								<p className="brand-eyebrow">🧑‍🍳 Food Coordination</p>
 								<h2 className="text-xl font-semibold text-zinc-100">Suggested Dinner Plan</h2>
 							</div>
 							<div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -607,7 +597,7 @@ export default function DinnerPage() {
 				<section className="brand-panel p-6 md:p-8">
 					<div className="flex items-center justify-between gap-3">
 						<div>
-							<p className="brand-eyebrow">🧑‍🍳 For Members (Food Coordination)</p>
+							<p className="brand-eyebrow">🧑‍🍳 Food Coordination</p>
 							<h2 className="mt-1 text-xl font-semibold text-zinc-100">WhatsApp Message</h2>
 						</div>
 						<button
