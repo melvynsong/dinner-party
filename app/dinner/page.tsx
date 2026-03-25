@@ -196,7 +196,7 @@ const buildWhatsappMessage = ({
 	addContributionSection(lines, "🍢", "Sides", plan.sides, "Side");
 	addContributionSection(lines, "🍰", "Desserts", plan.desserts, "Dessert");
 	addContributionSection(lines, "🥤", "Drinks / logistics", plan.drinks, "Drinks");
-	lines.push("Please indicate what you would like to bring below 🙏");
+	lines.push("Please indicate what you would like to bring above and your name 🙏");
 	lines.push("");
 	lines.push("Thank you everyone, and looking forward to a warm time of fellowship together 💛");
 
@@ -410,7 +410,7 @@ export default function DinnerPage() {
 
 							<label className="space-y-2">
 								<span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-300">
-									Location / Host
+										Host
 								</span>
 								<input
 									className="w-full rounded-2xl border border-indigo-100/20 bg-zinc-950/60 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-indigo-300/60 focus:ring-2 focus:ring-indigo-400/20"
